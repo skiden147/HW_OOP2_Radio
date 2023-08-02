@@ -1,5 +1,6 @@
 public class Radio {
-    public int currentChannel;
+    private int currentChannel;
+    private int currentVolume;
 
     public int getCurrentChannel() {
 
@@ -8,7 +9,7 @@ public class Radio {
 
     public void setCurrentChannel(int newCurrentChannel) {
         if (newCurrentChannel > 9) {
-            return;
+            newCurrentChannel = 0;
         }
         if (newCurrentChannel < 0) {
             newCurrentChannel = 9;
@@ -31,7 +32,6 @@ public class Radio {
         }
     }
 
-    public int currentVolume;
 
     public int getCurrentVolume() {
         return currentVolume;

@@ -40,30 +40,6 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldNotSetToNextChannel() {
-        Radio rad = new Radio();
-        rad.setCurrentChannel(15);
-        rad.setToNextChannel();
-
-        int expected = 1;
-        int actual = rad.getCurrentChannel();
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldNotSetToPrevChannel() {
-        Radio rad = new Radio();
-        rad.setCurrentChannel(-100);
-        rad.setToPrevChannel();
-
-        int expected = 8;
-        int actual = rad.getCurrentChannel();
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
     public void shouldNotSetChannelAboveMax() {
         Radio rad = new Radio();
 
@@ -86,6 +62,32 @@ public class RadioTest {
 
         Assertions.assertEquals(expected, actual);
     }
+
+    @Test
+    public void shouldNotSetToNextChannel() {
+        Radio rad = new Radio();
+        rad.setCurrentChannel(15);
+        rad.setToNextChannel();
+
+        int expected = 1;
+        int actual = rad.getCurrentChannel();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+
+    @Test
+    public void shouldNotSetToPrevChannel() {
+        Radio rad = new Radio();
+        rad.setCurrentChannel(-15);
+        rad.setToPrevChannel();
+
+        int expected = 8;
+        int actual = rad.getCurrentChannel();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
 
     @Test
     public void shouldIncreaseVolume() {
