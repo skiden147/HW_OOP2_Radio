@@ -3,17 +3,40 @@ import org.junit.jupiter.api.Test;
 
 public class RadioTest {
 
+
     @Test
     public void shouldSetChannel() {
         Radio rad = new Radio();
+        rad.setCurrentChannel(10);
 
-        rad.setCurrentChannel(7);
-
-        int expected = 7;
+        int expected = 10;
         int actual = rad.getCurrentChannel();
 
         Assertions.assertEquals(expected, actual);
     }
+
+    @Test
+    public void shouldNotSetChannelAboveMax() {
+        Radio rad = new Radio();
+        rad.setCurrentChannel(11);
+
+        int expected = 0;
+        int actual = rad.getCurrentChannel();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldNotSetChannelBelowMin() {
+        Radio rad = new Radio();
+        rad.setCurrentChannel(-1);
+
+        int expected = 0;
+        int actual = rad.getCurrentChannel();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
 
     @Test
     public void shouldSetToNextChannel() {
@@ -28,7 +51,31 @@ public class RadioTest {
     }
 
     @Test
+    public void shouldNotSetToNextChannel() {
+        Radio rad = new Radio();
+        rad.setCurrentChannel(11);
+        rad.setToNextChannel();
+
+        int expected = 1;
+        int actual = rad.getCurrentChannel();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
     public void shouldSetToPrevChannel() {
+        Radio rad = new Radio();
+        rad.setCurrentChannel(10);
+        rad.setToPrevChannel();
+
+        int expected = 9;
+        int actual = rad.getCurrentChannel();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldNotSetToPrevChannel() {
         Radio rad = new Radio();
         rad.setCurrentChannel(0);
         rad.setToPrevChannel();
@@ -40,10 +87,20 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldNotSetChannelAboveMax() {
-        Radio rad = new Radio();
+    public void shouldSetChannelConstructor() {
+        Radio rad = new Radio(30);
+        rad.setCurrentChannel(30);
 
-        rad.setCurrentChannel(11);
+        int expected = 30;
+        int actual = rad.getCurrentChannel();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldNotSetChannelAboveMaxConstructor() {
+        Radio rad = new Radio(30);
+        rad.setCurrentChannel(31);
 
         int expected = 0;
         int actual = rad.getCurrentChannel();
@@ -52,37 +109,11 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldNotSetChannelBelowMin() {
-        Radio rad = new Radio();
+    public void shouldNotSetChannelBelowMinConstructor() {
+        Radio rad = new Radio(30);
+        rad.setCurrentChannel(-1);
 
-        rad.setCurrentChannel(-2);
-
-        int expected = 9;
-        int actual = rad.getCurrentChannel();
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldNotSetToNextChannel() {
-        Radio rad = new Radio();
-        rad.setCurrentChannel(15);
-        rad.setToNextChannel();
-
-        int expected = 1;
-        int actual = rad.getCurrentChannel();
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-
-    @Test
-    public void shouldNotSetToPrevChannel() {
-        Radio rad = new Radio();
-        rad.setCurrentChannel(-15);
-        rad.setToPrevChannel();
-
-        int expected = 8;
+        int expected = 0;
         int actual = rad.getCurrentChannel();
 
         Assertions.assertEquals(expected, actual);

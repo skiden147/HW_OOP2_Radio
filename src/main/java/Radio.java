@@ -1,34 +1,43 @@
 public class Radio {
-    private int currentChannel;
+    private int maxChannel = 10;
+    private int minChannel = 0;
+    private int currentChannel = minChannel;
     private int currentVolume;
 
-    public int getCurrentChannel() {
+    public Radio(int maxChannel) {
+        this.maxChannel = maxChannel;
+    }
 
+    public Radio() {
+
+    }
+
+    public int getCurrentChannel() {
         return currentChannel;
     }
 
     public void setCurrentChannel(int newCurrentChannel) {
-        if (newCurrentChannel > 9) {
-            newCurrentChannel = 0;
+        if (newCurrentChannel > maxChannel) {
+            return;
         }
-        if (newCurrentChannel < 0) {
-            newCurrentChannel = 9;
+        if (newCurrentChannel < minChannel) {
+            return;
         }
         currentChannel = newCurrentChannel;
     }
 
     public void setToNextChannel() {
         currentChannel = currentChannel + 1;
-        if (currentChannel > 9) {
-            currentChannel = 0;
+        if (currentChannel >= maxChannel) {
+            currentChannel = minChannel;
         }
 
     }
 
     public void setToPrevChannel() {
         currentChannel = currentChannel - 1;
-        if (currentChannel < 0) {
-            currentChannel = 9;
+        if (currentChannel < minChannel) {
+            currentChannel = maxChannel - 1;
         }
     }
 
