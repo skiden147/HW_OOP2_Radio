@@ -1,34 +1,42 @@
 public class Radio {
-    private int currentChannel;
+    private int countStation = 10;
+    private int currentStation;
     private int currentVolume;
 
-    public int getCurrentChannel() {
-
-        return currentChannel;
+    public Radio() {
     }
 
-    public void setCurrentChannel(int newCurrentChannel) {
-        if (newCurrentChannel > 9) {
-            newCurrentChannel = 0;
-        }
-        if (newCurrentChannel < 0) {
-            newCurrentChannel = 9;
-        }
-        currentChannel = newCurrentChannel;
+    public Radio(int countStation) {
+        this.countStation = countStation;
     }
 
-    public void setToNextChannel() {
-        currentChannel = currentChannel + 1;
-        if (currentChannel > 9) {
-            currentChannel = 0;
+    public int getCurrentStation() {
+        return currentStation;
+    }
+
+    public void setCurrentStation(int newCurrentStation) {
+        if (newCurrentStation > countStation) {
+            return;
+        }
+        if (newCurrentStation < 0) {
+            return;
+        }
+        currentStation = newCurrentStation;
+    }
+
+    public void setToNextStation() {
+        currentStation = currentStation + 1;
+        if (currentStation >= countStation) {
+            currentStation = 0;
         }
 
     }
 
-    public void setToPrevChannel() {
-        currentChannel = currentChannel - 1;
-        if (currentChannel < 0) {
-            currentChannel = 9;
+    public void setToPrevStation() {
+        if (currentStation != 0) {
+            currentStation--;
+        } else {
+            currentStation = countStation - 1;
         }
     }
 
